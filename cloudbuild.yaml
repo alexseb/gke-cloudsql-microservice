@@ -9,7 +9,8 @@ steps:
       'container', 'clusters', 'get-credentials',
       '${_CLUSTER}',
       '--region', '${_REGION}',
-      '--project', '${_PROJECT_ID}'
+      '--project', '${_PROJECT_ID}',
+      '--zone', '${_ZONE}'
     ]
 
   - name: 'gcr.io/cloud-builders/kubectl'
