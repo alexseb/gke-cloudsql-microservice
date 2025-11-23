@@ -19,9 +19,9 @@ images:
 
 
 substitutions:
-_IMAGE: "$IMAGE_URI"
-_REGION: "$REGION"
-_ZONE: "$ZONE"
+_IMAGE: "us-central1-docker.pkg.dev/my-gke-cloudsql-demo-ruen/my-microservice-repo/microservice"
+_REGION: "us-central1"
+_ZONE: "us-central1-c"
 
 
 timeout: '1200s'
