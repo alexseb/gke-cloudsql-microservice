@@ -20,7 +20,6 @@ steps:
       - 'microservice=${_IMAGE}:${SHORT_SHA}'
     env:
       - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
-      - 'CLOUDSDK_COMPUTE_REGION=${_REGION}'
       - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
       - 'CLOUDSDK_CORE_PROJECT=${_PROJECT_ID}'
 
