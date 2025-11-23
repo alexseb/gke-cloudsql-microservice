@@ -19,7 +19,7 @@ spec:
         #  Main Microservice
         # --------------------------
         - name: microservice
-          image: microservice
+          image: us-central1-docker.pkg.dev/my-gke-cloudsql-demo-ruen/my-microservice-repo/microservice:16bebb5
           ports:
             - containerPort: 8080
           env:

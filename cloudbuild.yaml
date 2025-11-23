@@ -18,6 +18,7 @@ steps:
       - 'image'
       - 'deployment/microservice-deployment'
       - 'microservice=${_IMAGE}:${SHORT_SHA}'
+      - '--namespace=app'
     env:
       - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
       - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
