@@ -8,22 +8,33 @@ spec:
   selector:
     matchLabels:
       app: microservice
-    template:
-      metadata:
-        labels:
-          app: microservice
-      spec:
-        serviceAccountName: app-k8s-sa
-        containers:
-          - name: microservice
-            image: REPLACE_WITH_IMAGE
-            ports:
+  template:
+    metadata:
+      labels:
+        app: microservice
+    spec:
+      serviceAccountName: app-k8s-sa
+      containers:
+        # --------------------------
+        #  Main Microservice
+        # --------------------------
+        - name: microservice
+          image: microservice
+          ports:
             - containerPort: 8080
-            env:
+          env:
             - name: DATABASE_URL
-              value: "postgresql://dbuser:P@ssw0rd@127.0.0.1:5432/appdb" # if using Cloud SQL Proxy socket, replace
-            - name: cloud-sql-proxy
-            image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.0
-            command: ["/cloud-sql-proxy"]
-            args: ["-instances=PROJECT:REGION:INSTANCE=tcp:5432"]
-            # Alternatively use unix socket: -instances=PROJECT:REGION:INSTANCE=/cloudsql
+              value: "postgresql://dbuser:P@ssw0rd@127.0.0.1:5432/appdb"
+              # NOTE: microservice connects to 127.0.0.1 because proxy exposes 5432 locally
+
+        # --------------------------
+        #  Cloud SQL Auth Proxy
+        # --------------------------
+        - name: cloud-sql-proxy
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.0
+          command:
+            - "/cloud-sql-proxy"
+          args:
+            - "--port=5432"
+            - "PROJECT_ID:REGION:INSTANCE_ID"
+
