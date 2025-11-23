@@ -9,7 +9,7 @@ steps:
       'container', 'clusters', 'get-credentials',
       '${_CLUSTER}',
       '--region', '${_REGION}',
-      '--project', '${PROJECT_ID}'
+      '--project', '${_PROJECT_ID}'
     ]
 
   - name: 'gcr.io/cloud-builders/kubectl'
@@ -19,8 +19,10 @@ steps:
       - 'deployment/microservice-deployment'
       - 'microservice=${_IMAGE}:${SHORT_SHA}'
     env:
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
       - 'CLOUDSDK_COMPUTE_REGION=${_REGION}'
       - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+      - 'CLOUDSDK_CORE_PROJECT=${_PROJECT_ID}'
 
 images:
   - '${_IMAGE}:${SHORT_SHA}'
@@ -29,7 +31,8 @@ substitutions:
   _IMAGE: "us-central1-docker.pkg.dev/my-gke-cloudsql-demo-ruen/my-microservice-repo/microservice"
   _REGION: "us-central1"
   _CLUSTER: "my-gke-cluster"
-  PROJECT_ID: "my-gke-cloudsql-demo-ruen"
+  _PROJECT_ID: "my-gke-cloudsql-demo-ruen"
+  _ZONE: "us-central1-c"
 
 timeout: '1200s'
 
