@@ -4,6 +4,13 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', '${_IMAGE}:${SHORT_SHA}']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'container', 'clusters', 'get-credentials',
+      '${_CLUSTER}',
+      '--region', '${_REGION}',
+      '--project', '${PROJECT_ID}'
+    ]
 
   - name: 'gcr.io/cloud-builders/kubectl'
     args:
@@ -21,7 +28,8 @@ images:
 substitutions:
   _IMAGE: "us-central1-docker.pkg.dev/my-gke-cloudsql-demo-ruen/my-microservice-repo/microservice"
   _REGION: "us-central1"
-  _ZONE: "us-central1-c"
+  _CLUSTER: "my-gke-cluster"
+  PROJECT_ID: "my-gke-cloudsql-demo-ruen"
 
 timeout: '1200s'
 
