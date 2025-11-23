@@ -8,7 +8,6 @@ steps:
     args: [
       'container', 'clusters', 'get-credentials',
       '${_CLUSTER}',
-      '--region', '${_REGION}',
       '--project', '${_PROJECT_ID}',
       '--zone', '${_ZONE}'
     ]
