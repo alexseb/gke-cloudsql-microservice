@@ -30,7 +30,7 @@ images:
 substitutions:
   _IMAGE: "us-central1-docker.pkg.dev/my-gke-cloudsql-demo-ruen/my-microservice-repo/microservice"
   _REGION: "us-central1"
-  _CLUSTER: "my-gke-cluster"
+  _CLUSTER: "app-cluster"
   _PROJECT_ID: "my-gke-cloudsql-demo-ruen"
   _ZONE: "us-central1-c"
 
